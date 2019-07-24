@@ -1,4 +1,5 @@
 {
+  "editor.snippetSuggestions": "top",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
