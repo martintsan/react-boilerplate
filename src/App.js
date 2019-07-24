@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component, Suspense } from 'react'
+// import Warning from './Warning'
+const Warning = React.lazy(() => import('./Warning'))
+import styled, { css } from 'styled-components'
 
 const Title = styled.h1`
   font-family: 'Helvetica,Arial,sans-serif';
@@ -7,9 +9,41 @@ const Title = styled.h1`
   color: palevioletred;
 `
 
+const Button = styled.button`
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 11rem;
+  background: transparent;
+  color: black;
+  border: 2px solid black;
+  cursor: pointer;
+
+  ${props =>
+    props.primary &&
+    css`
+      border-color: palevioletred;
+      background: palevioletred;
+      color: white;
+    `}
+`
+
 export default class App extends Component {
   state = {
     count: 0
+  }
+
+  increment() {
+    this.setState(state => ({
+      count: state.count + 1
+    }))
+  }
+
+  decrement() {
+    this.setState(state => ({
+      count: state.count - 1
+    }))
   }
 
   render() {
@@ -17,6 +51,15 @@ export default class App extends Component {
       <div>
         <Title>Hello React!</Title>
         <h2>Count: {this.state.count} </h2>
+        {this.state.count > 10 ? (
+          <Suspense fallback={null}>
+            <Warning />
+          </Suspense>
+        ) : null}
+        <Button primary onClick={() => this.increment()}>
+          +
+        </Button>
+        <Button onClick={() => this.decrement()}>-</Button>
       </div>
     )
   }
