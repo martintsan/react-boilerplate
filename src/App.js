@@ -1,5 +1,4 @@
 import React, { Component, Suspense } from 'react'
-// import Warning from './Warning'
 const Warning = React.lazy(() => import('./Warning'))
 import styled, { css } from 'styled-components'
 
@@ -29,7 +28,7 @@ const Button = styled.button`
     `}
 `
 
-export default class App extends Component {
+class App extends Component {
   state = {
     count: 0
   }
@@ -60,7 +59,10 @@ export default class App extends Component {
           +
         </Button>
         <Button onClick={() => this.decrement()}>-</Button>
+        <img src="./log/png" alt="User"/>
       </div>
     )
   }
 }
+
+export default App
